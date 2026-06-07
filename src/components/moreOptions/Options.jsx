@@ -6,7 +6,7 @@ const Options = ({id, del, setDel, setEditOpen, editOpen}) => {
     
 
     const delTask = async () => {
-        await fetch(`https://todo-app-production-fe20.up.railway.app/tasks/${id}`, {
+        await fetch(`https://todo-backend-gl1o.onrender.com/tasks/${id}`, {
             method: "DELETE",
         });
     }
