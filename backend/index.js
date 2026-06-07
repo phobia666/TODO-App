@@ -10,7 +10,15 @@ app.use(cors(
 ));
 app.use(express.json());
 
-const db = mysql.createConnection(process.env.MYSQL_PUBLIC_URL);
+const dbUrl = new URL(process.env.MYSQL_PUBLIC_URL);
+
+const db = mysql.createConnection({
+  host: dbUrl.hostname,
+  user: dbUrl.username,
+  password: dbUrl.password,
+  database: dbUrl.pathname.slice(1),
+  port: dbUrl.port,
+});
 
 db.connect((err) => {
   if (err) throw err;
