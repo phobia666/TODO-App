@@ -27,7 +27,7 @@ const Task = ({id, title, category, description, status, del, setDel, setEditOpe
   
   return (
     <div className='w-12/25 bg-white rounded-3xl px-8 py-5 relative'>
-      {option && <Options id={id} del={del} setDel={setDel} setEditOpen={setEditOpen} editOpen={editOpen} />}
+      {option && <Options id={id} title={title} category={category} description={description} del={del}  setDel={setDel} setEditOpen={setEditOpen} editOpen={editOpen}  />}
       <div className='flex items-center justify-between'>
         <h3 className='font-semibold text-xl'>{title}</h3>
         <div className='flex gap-5'>

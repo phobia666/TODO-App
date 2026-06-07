@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import EditTask from '../Dialog/EditTask';
 
-const Options = ({id, del, setDel, setEditOpen, editOpen}) => {
+const Options = ({id, title, category, description, del, setDel, setEditOpen, editOpen}) => {
 
     
 
@@ -15,7 +15,7 @@ const Options = ({id, del, setDel, setEditOpen, editOpen}) => {
     }
   return (
         <div className='absolute right-0 top-12 bg-white shadow-lg rounded-xl p-2 z-10 flex flex-col gap-1 w-32'>
-            {editOpen && <EditTask setEditOpen={setEditOpen} id={id}/>}
+            {editOpen && <EditTask setEditOpen={setEditOpen} id={id} title={title} category={category} description={description}/>}
             <button
             onClick={(e) =>{
                 setEditOpen(true);

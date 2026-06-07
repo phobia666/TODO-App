@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 
-const EditTask = ({setEditOpen, id}) => {
+const EditTask = ({setEditOpen, id, title: initTitle, category: initCategory, description: initDescription}) => {
 
-    const [selected, setSelected] = useState('placeholder')
+    const [selected, setSelected] = useState(initCategory || 'placeholder')
     const [error, setError] = useState('');
     const [titleError, setTitleError] = useState('')
     const [descError, setDescError] = useState('')
-    const [title, setTitle] = useState('')
-    const [description, setDescription] = useState('')
+    const [title, setTitle] = useState(initTitle || '')
+    const [description, setDescription] = useState(initDescription || '')
 
     const editTask = async (id, title, category, description) => {
         await fetch(`https://todo-backend-gl1o.onrender.com/tasks/${id}`, {
