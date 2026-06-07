@@ -1,10 +1,21 @@
-import React, { useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import { Ellipsis } from 'lucide-react'
 import Options from '../moreOptions/Options';
 
 const Task = ({id, title, category, description, status, del, setDel, setEditOpen, editOpen}) => {
 
   const [option, setOption] = useState(false);
+  const optionRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (optionRef.current && !optionRef.current.contains(e.target)) {
+        setOption(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   const getColor = (category) => {
     switch(category){
@@ -27,17 +38,20 @@ const Task = ({id, title, category, description, status, del, setDel, setEditOpe
   
   return (
     <div className='w-12/25 bg-white rounded-3xl px-8 py-5 relative'>
-      {option && <Options id={id} title={title} category={category} description={description} del={del}  setDel={setDel} setEditOpen={setEditOpen} editOpen={editOpen}  />}
+      {option && (
+        <div ref={optionRef}>
+          <Options id={id} title={title} category={category} description={description} del={del} setDel={setDel} setEditOpen={setEditOpen} editOpen={editOpen} />
+        </div>
+      )}
       <div className='flex items-center justify-between'>
         <h3 className='font-semibold text-xl'>{title}</h3>
         <div className='flex gap-5'>
           <div className={`${color} rounded-3xl px-3 py-1`}>
             <h3 className='font-medium text-sm'>{firstWord}</h3>
           </div>
-
           <Ellipsis
-          className='cursor-pointer'
-          onClick={() => setOption(true)}
+            className='cursor-pointer'
+            onClick={() => setOption(true)}
           />
         </div>
       </div>
