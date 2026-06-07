@@ -67,10 +67,6 @@ const Card = ({ title, projects, active }) => {
           <div className={`w-full rounded-full h-1.5 ${active ? 'bg-gray-300' : 'bg-[#c9c9c9]'}`}>
             <div className={`h-1.5 rounded-full ${active ? 'bg-white' : 'bg-[#7F56D9]'}`} style={{ width: '70%' }}></div>
           </div>
-          <div className='flex justify-between'>
-            <p className={`text-sm ${active ? 'text-gray-200' : 'text-gray-500'}`}>Progress</p>
-            <p className={`text-sm ${active ? 'text-gray-200' : 'text-gray-500'}`}>70%</p>
-          </div>
         </div>
       </div>
 
