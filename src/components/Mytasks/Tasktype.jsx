@@ -10,7 +10,7 @@ const Tasktype = ({open, del, setDel, setEditOpen, editOpen}) => {
   
 
   const getTasks = async () =>{
-    const response = await fetch('http://localhost:5000/tasks');
+    const response = await fetch('https://todo-app-production-fe20.up.railway.app/tasks');
     const data = await response.json();
     setTasks(data);
     console.log(tasks);

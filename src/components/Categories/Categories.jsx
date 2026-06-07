@@ -16,7 +16,7 @@ const Categories = ({open, del, editOpen}) => {
   const [testingQA, setTestingQA] = useState(0)
 
   const getTasks = async () => {
-    const response = await fetch("http://localhost:5000/tasks");
+    const response = await fetch("https://todo-app-production-fe20.up.railway.app/tasks");
     const tasks = await response.json();
     
     setLandingCount(tasks.filter(task => task.category === 'Landing Page Designs').length);

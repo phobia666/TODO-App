@@ -10,7 +10,7 @@ const EditTask = ({setEditOpen, id}) => {
     const [description, setDescription] = useState('')
 
     const editTask = async (id, title, category, description) => {
-        await fetch(`http://localhost:5000/tasks/${id}`, {
+        await fetch(`https://todo-app-production-fe20.up.railway.app/tasks/${id}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ title, category, description }),

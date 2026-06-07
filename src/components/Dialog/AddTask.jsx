@@ -10,7 +10,7 @@ const AddTask = ({setOpen}) => {
     const [description, setDescription] = useState('')
 
     const addTask = async (title, category, status, description) => {
-        await fetch('http://localhost:5000/tasks', {
+        await fetch('https://todo-app-production-fe20.up.railway.app/tasks', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json'},
             body: JSON.stringify({title, category, status, description}),
