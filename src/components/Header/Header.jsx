@@ -1,7 +1,23 @@
-import React from 'react'
+import React, { useEffect, useEffectEvent, useState } from 'react'
 import { LayoutGrid, ChartPie, CalendarDays, Settings, Search } from 'lucide-react'
 
-const Header = ({open}) => {
+const Header = ({open, del, editOpen}) => {
+
+
+    const [totalTasks, setTotalTasks] = useState(0);
+
+
+    const getTasks = async () =>{
+        const response = await fetch('https://todo-backend-gl1o.onrender.com/tasks');
+        const data = await response.json();
+        setTotalTasks(data.length);
+    }
+    
+    useEffect(() =>{
+        getTasks();
+    }, [open, del, editOpen])
+
+
 
   return (
     <div className={`w-full px-8 py-5 flex justify-between`}>
@@ -10,7 +26,7 @@ const Header = ({open}) => {
             <img className='object-co   ver w-20 h-20 rounded-full shadow-md shadow-gray-400' src="ab.jpg" alt="" />
             <div>
                 <h3 className='font-semibold text-xl tracking-wide '>Abhyanshu Shah</h3>
-                <p className='font-normal text-s tracking-normal text-gray-400'>39 tasks today</p>
+                <p className='font-normal text-s tracking-normal text-gray-400'>{totalTasks} tasks today</p>
             </div>
         </div>
 
