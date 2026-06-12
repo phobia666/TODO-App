@@ -55,7 +55,7 @@ const AddTask = ({setOpen}) => {
             e.preventDefault();
             testing(e);
         }}
-        className='bg-white  rounded-3xl flex flex-col gap-5 p-5'>
+        className='bg-white  rounded-3xl flex flex-col gap-5 p-10'>
         <div  className='flex flex-col items-center justify-center gap-5'>
             <h2 className='font-semibold text-2xl'>Enter Task Details</h2>
 

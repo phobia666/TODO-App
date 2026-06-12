@@ -19,15 +19,11 @@ const App = () => {
 
   return (
     <div>
-      <Header open={open} del={del} editOpen={editOpen} /> 
-      <Newtask  setOpen={setOpen}/>
+      <Header open={open} del={del} editOpen={editOpen} setOpen={setOpen}/> 
       <Categories open={open} del={del} editOpen={editOpen} />
       <Tasktype open={open} del={del} setDel={setDel} setEditOpen={setEditOpen} editOpen={editOpen}/>
       <Footer />
       {open && <AddTask open={open} setOpen={setOpen} />}
-      
-      
-
     </div>
   )
 }

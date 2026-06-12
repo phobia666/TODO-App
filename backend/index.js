@@ -1,3 +1,8 @@
+// https://todo-backend-gl1o.onrender.com
+//render backend link
+// http://localhost:5000
+
+
 const express = require("express");
 const mysql = require("mysql2");
 const cors = require("cors");
@@ -19,6 +24,14 @@ const db = mysql.createConnection({
   database: dbUrl.pathname.slice(1),
   port: dbUrl.port,
 });
+
+// const db = mysql.createConnection({
+//   host: '127.0.0.1',
+//   user: 'root',
+//   password: 'turasqlMine13adow@',
+//   database: 'taskdb',
+//   port: 3306,
+// });
 
 db.connect((err) => {
   if (err) throw err;
@@ -53,9 +66,9 @@ app.delete("/tasks/:id", (req, res) => {
 });
 
 app.put("/tasks/:id", (req, res) => {
-  const { title, category, description } = req.body;
-  db.query("UPDATE tasks SET title=?, category=?, description=? WHERE id=?",
-    [title, category, description, req.params.id],
+  const { title, category, description, status } = req.body;
+  db.query("UPDATE tasks SET title=?, category=?, description=?, status=? WHERE id=?",
+    [title, category, description, status, req.params.id],
     (err) => {
       if (err) throw err;
       res.json({ message: "Task updated" });

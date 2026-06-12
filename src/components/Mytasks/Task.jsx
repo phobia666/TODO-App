@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react'
 import { Ellipsis } from 'lucide-react'
 import Options from '../moreOptions/Options';
+import EditTask from '../Dialog/EditTask';
 
 const Task = ({id, title, category, description, status, del, setDel, setEditOpen, editOpen}) => {
 
@@ -16,6 +17,8 @@ const Task = ({id, title, category, description, status, del, setDel, setEditOpe
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
+
+
 
   const getColor = (category) => {
     switch(category){
@@ -37,10 +40,14 @@ const Task = ({id, title, category, description, status, del, setDel, setEditOpe
   const color = getColor(category);
   
   return (
-    <div className='w-12/25 bg-white rounded-3xl px-8 py-5 relative'>
+    
+    <div className=' bg-white flex flex-col gap-2 rounded-3xl px-8 py-5 relative'>
+      {editOpen && 
+        <EditTask setEditOpen={setEditOpen} id={id} title={title} category={category} description={description} status={0} />}
+
       {option && (
         <div ref={optionRef}>
-          <Options id={id} title={title} category={category} description={description} del={del} setDel={setDel} setEditOpen={setEditOpen} editOpen={editOpen} />
+          <Options setOption={setOption} status={status} id={id} title={title} category={category} description={description} del={del} setDel={setDel} setEditOpen={setEditOpen} editOpen={editOpen} />
         </div>
       )}
       <div className='flex items-center justify-between'>
@@ -55,7 +62,7 @@ const Task = ({id, title, category, description, status, del, setDel, setEditOpe
           />
         </div>
       </div>
-      <p className='text-gray-600'>{description}</p>
+      <p className='text-gray-600 '>{description}</p>
     </div>
   )
 }

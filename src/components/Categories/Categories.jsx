@@ -63,7 +63,7 @@ const Categories = ({open, del, editOpen}) => {
   }, [emblaApi])
 
   return (
-    <div className='flex flex-col gap-5 justify-center items-center'>
+    <div className='flex flex-col gap-5 justify-center items-center pt-10 lg:pt-40 '>
       <h2 className='font-medium text-3xl tracking-wide'>Categories</h2>
 
       <div className='overflow-hidden  w-full py-6' ref={emblaRef}>

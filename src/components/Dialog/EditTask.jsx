@@ -9,13 +9,13 @@ const EditTask = ({setEditOpen, id, title: initTitle, category: initCategory, de
     const [title, setTitle] = useState(initTitle || '')
     const [description, setDescription] = useState(initDescription || '')
 
-    const editTask = async (id, title, category, description) => {
+    const editTask = async (id, title, category, description, status) => {
         await fetch(`https://todo-backend-gl1o.onrender.com/tasks/${id}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ title, category, description }),
+            body: JSON.stringify({ title, category, description, status }),
         });
-    }   
+    }
 
     const testing = (e) => {
         let cond1 = selected =='placeholder';
