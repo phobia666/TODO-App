@@ -12,7 +12,7 @@ const Newtask = ({open, setOpen}) => {
             </div>
             <button
             onClick={()=>{
-                setOpen(true) 
+                setOpen(true)
             }}
             className='cursor-pointer transition-transform duration-200 hover:scale-110 group absolute right-0 lg:right-3  w-20 h-20 rounded-full bg-black flex items-center justify-center'>
                 <Plus size={30} className='text-white transition-transform duration-200 group-hover:scale-85'/>

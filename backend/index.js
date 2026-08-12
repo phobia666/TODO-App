@@ -23,6 +23,9 @@ const db = mysql.createConnection({
   password: dbUrl.password,
   database: dbUrl.pathname.slice(1),
   port: dbUrl.port,
+  ssl: {
+    rejectUnauthorized: false
+  }
 });
 
 // const db = mysql.createConnection({
