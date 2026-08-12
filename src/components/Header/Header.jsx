@@ -12,7 +12,7 @@ const Header = ({open, del, editOpen, setOpen}) => {
         const response = await fetch('https://todo-backend-gl1o.onrender.com/tasks');
         const data = await response.json();
         setTotalTasks(data.length);
-    }
+    }   
     
     useEffect(() =>{
         getTasks();

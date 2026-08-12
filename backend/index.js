@@ -37,8 +37,31 @@ const db = mysql.createConnection({
 // });
 
 db.connect((err) => {
-  if (err) throw err;
+  if (err) {
+    console.error("MySQL connection failed:", err);
+    return;
+  }
+
   console.log("MySQL connected!");
+
+  const createTable = `
+    CREATE TABLE IF NOT EXISTS tasks (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      title VARCHAR(255) NOT NULL,
+      category VARCHAR(100),
+      status VARCHAR(50),
+      description TEXT
+    )
+  `;
+
+  db.query(createTable, (err) => {
+    if (err) {
+      console.error("Error creating tasks table:", err);
+      return;
+    }
+
+    console.log("Tasks table ready!");
+  });
 });
 
 // Get all tasks
