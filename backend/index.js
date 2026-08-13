@@ -8,12 +8,21 @@ const mysql = require("mysql2");
 const cors = require("cors");
 
 const app = express();
+
+
+
+
 app.use(cors(
   {
   origin: 'https://phobiaytodoapp.netlify.app'
 }
 ));
 app.use(express.json());
+
+app.get("/test", (req, res) => {
+  res.json({ message: "test route works" });
+});
+
 
 const dbUrl = new URL(process.env.MYSQL_PUBLIC_URL);
 
@@ -68,6 +77,21 @@ db.getConnection((err, connection) => {
     console.log("Tasks table ready!");
   });
 });
+
+// Get all tasks
+app.get("/tasks", (req, res) => {
+  db.query("SELECT * FROM tasks", (err, results) => {
+    if (err) {
+      console.error("GET TASKS ERROR:", err);
+      return res.status(500).json({
+        error: err.message
+      });
+    }
+
+    res.json(results);
+  });
+});
+
 
 // Add a task
 app.post("/tasks", (req, res) => {
