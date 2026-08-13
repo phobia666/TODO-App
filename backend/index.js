@@ -67,7 +67,13 @@ db.connect((err) => {
 // Get all tasks
 app.get("/tasks", (req, res) => {
   db.query("SELECT * FROM tasks", (err, results) => {
-    if (err) throw err;
+    if (err) {
+      console.error("GET TASKS ERROR:", err);
+      return res.status(500).json({
+        error: err.message
+      });
+    }
+
     res.json(results);
   });
 });
