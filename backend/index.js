@@ -17,7 +17,7 @@ app.use(express.json());
 
 const dbUrl = new URL(process.env.MYSQL_PUBLIC_URL);
 
-const db = mysql.createConnection({
+const db = mysql.createPool({
   host: dbUrl.hostname,
   user: dbUrl.username,
   password: dbUrl.password,
@@ -25,7 +25,10 @@ const db = mysql.createConnection({
   port: dbUrl.port,
   ssl: {
     rejectUnauthorized: false
-  }
+  },
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0
 });
 
 // const db = mysql.createConnection({
@@ -36,7 +39,7 @@ const db = mysql.createConnection({
 //   port: 3306,
 // });
 
-db.connect((err) => {
+db.getConnection((err, connection) => {
   if (err) {
     console.error("MySQL connection failed:", err);
     return;
@@ -54,27 +57,15 @@ db.connect((err) => {
     )
   `;
 
-  db.query(createTable, (err) => {
+  connection.query(createTable, (err) => {
+    connection.release();
+
     if (err) {
       console.error("Error creating tasks table:", err);
       return;
     }
 
     console.log("Tasks table ready!");
-  });
-});
-
-// Get all tasks
-app.get("/tasks", (req, res) => {
-  db.query("SELECT * FROM tasks", (err, results) => {
-    if (err) {
-      console.error("GET TASKS ERROR:", err);
-      return res.status(500).json({
-        error: err.message
-      });
-    }
-
-    res.json(results);
   });
 });
 
